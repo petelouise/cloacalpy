@@ -1,4 +1,6 @@
+import os
 import sys
+from pathlib import Path
 
 import click
 
@@ -26,7 +28,16 @@ def cli():
     type=int,
     help="Maximum line width (default: 44)",
 )
-def format(file, width):
+@click.option(
+    "-o",
+    "--output",
+    type=click.Path(),
+    default=None,
+    help="Output file path (prints to stdout if not provided)",
+    is_flag=False,
+    flag_value="",
+)
+def format(file, width, output):
     """Format a .clo file."""
 
     if file:
@@ -42,7 +53,12 @@ def format(file, width):
 
     formatted_output = format_clo_string(input_text, max_line_length=width)
 
-    click.echo(formatted_output)
+    if output is None:
+        click.echo(formatted_output)
+    else:
+        output_path = output if output else file.name
+        with open(output_path, 'w') as f:
+            f.write(formatted_output)
 
 
 @cli.command()
@@ -59,14 +75,34 @@ def format(file, width):
     type=int,
     help="Maximum line width (default: 44)",
 )
-def toml(file, width):
+@click.option(
+    "-o",
+    "--output",
+    type=click.Path(),
+    default=None,
+    help="Output file path (prints to stdout if not provided)",
+    is_flag=False,
+    flag_value="",
+)
+def toml(file, width, output):
     """Convert TOML to Cloacal format."""
 
     toml_input = file.read()
 
     formatted_output = toml2clo(toml_input, max_line_length=width)
 
-    click.echo(formatted_output)
+    if output is None:
+        click.echo(formatted_output)
+    else:
+        if output:
+            output_path = output
+        else:
+            # Replace .toml extension with .clo
+            input_path = Path(file.name)
+            output_path = input_path.with_suffix('.clo')
+        
+        with open(output_path, 'w') as f:
+            f.write(formatted_output)
 
 
 def main():
