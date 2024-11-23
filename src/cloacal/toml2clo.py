@@ -5,7 +5,7 @@ import tomllib
 from .format import format_clo
 
 
-def toml_to_clo(toml_input: str, max_line_length: int = 44) -> str:
+def toml2clo(toml_input: str, max_line_length: int = 44) -> str:
     """
     Converts a TOML string to a formatted Cloacal string.
 
