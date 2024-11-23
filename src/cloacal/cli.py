@@ -16,11 +16,11 @@ def main():
     )
     args = argparser.parse_args()
 
-    if not args.file:
-        input_text = sys.stdin.read()
-    else:
+    if args.file:
         with open(args.file, "r") as f:
             input_text = f.read()
+    else:
+        input_text = sys.stdin.read()
 
     formatted_output = format_clo_string(input_text, max_line_length=args.width)
     print(formatted_output)
