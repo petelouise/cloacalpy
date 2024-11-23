@@ -13,6 +13,7 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
+    "pytest>=8.3.3",
     "pyupgrade>=3.19.0",
     "ruff>=0.8.0",
 ]
