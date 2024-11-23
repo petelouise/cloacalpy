@@ -1,7 +1,7 @@
+import glob
 import os
 import sys
 from pathlib import Path
-import glob
 
 import click
 
@@ -19,7 +19,7 @@ def cli():
 @click.option(
     "-f",
     "--file",
-    type=str,
+    type=str | list[str],
     default=None,
     help="Input .clo file or glob pattern (reads from stdin if not provided)",
 )
@@ -40,20 +40,23 @@ def cli():
 )
 def format(file, width, output):
     """Format a .clo file."""
-
     if file:
-        # Handle glob pattern
-        input_files = glob.glob(file)
+        # Handle glob pattern or list of files
+        if isinstance(file, str):
+            input_files = glob.glob(file)
+        elif isinstance(file, list):
+            input_files = file
+
         if not input_files:
             click.echo(f"No files found matching pattern: {file}", err=True)
             sys.exit(1)
-        
+
         for input_file in input_files:
-            with open(input_file, 'r') as f:
+            with open(input_file, "r") as f:
                 input_text = f.read()
-            
-            formatted_output = format_clo_string(input_text, max_line_length=width)
-            
+
+            formatted_output = format_str(input_text, max_line_length=width)
+
             if output is None:
                 # Print with file header if multiple files
                 if len(input_files) > 1:
@@ -69,13 +72,13 @@ def format(file, width, output):
                         output_path = output
                 else:
                     output_path = input_file
-                
-                with open(output_path, 'w') as f:
+
+                with open(output_path, "w") as f:
                     f.write(formatted_output)
 
     elif not sys.stdin.isatty():
         input_text = sys.stdin.read()
-        formatted_output = format_clo_string(input_text, max_line_length=width)
+        formatted_output = format_str(input_text, max_line_length=width)
         click.echo(formatted_output)
 
     else:
@@ -115,7 +118,7 @@ def toml(file, width, output):
         sys.exit(1)
 
     for input_file in input_files:
-        with open(input_file, 'r') as f:
+        with open(input_file, "r") as f:
             toml_input = f.read()
 
         formatted_output = toml2clo(toml_input, max_line_length=width)
@@ -136,9 +139,9 @@ def toml(file, width, output):
             else:
                 # Replace .toml extension with .clo
                 input_path = Path(input_file)
-                output_path = input_path.with_suffix('.clo')
-            
-            with open(output_path, 'w') as f:
+                output_path = input_path.with_suffix(".clo")
+
+            with open(output_path, "w") as f:
                 f.write(formatted_output)
 
 
