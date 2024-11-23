@@ -3,7 +3,7 @@ import textwrap
 from .parse import parse_clo
 
 
-def format_clo(data: dict[str, str], max_line_length=44):
+def format_clo(data: dict[str, str | list], max_line_length=44):
     """
     formats the data ordereddict into a beautiful clo string.
 
@@ -99,7 +99,7 @@ def format_clo(data: dict[str, str], max_line_length=44):
             effective_width = wrap_width - indent
             # use break_long_words=false to prevent word splitting
             wrapped_text = textwrap.fill(
-                str(value),
+                value,
                 width=effective_width,
                 break_long_words=False,
                 break_on_hyphens=False,
