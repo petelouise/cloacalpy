@@ -2,7 +2,7 @@ import re
 from collections import OrderedDict
 
 
-def parse_clo(input_text):
+def parse(input_text):
     """
     Parses the clo input text and returns an OrderedDict representing the data.
     """

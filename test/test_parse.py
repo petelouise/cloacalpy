@@ -1,6 +1,6 @@
 from collections import OrderedDict
 
-from cloacal.parse import parse_clo
+from cloacal.parse import parse
 
 
 def test_parse_basic_input():
@@ -48,7 +48,7 @@ def test_parse_basic_input():
         }
     )
 
-    result = parse_clo(clo_input)
+    result = parse(clo_input)
     assert result == expected_output
 
 
@@ -94,7 +94,7 @@ def test_parse_inconsistent_formatting():
         }
     )
 
-    result = parse_clo(clo_input)
+    result = parse(clo_input)
     assert result == expected_output
 
 
@@ -118,7 +118,7 @@ def test_parse_missing_fields():
         }
     )
 
-    result = parse_clo(clo_input)
+    result = parse(clo_input)
     assert result == expected_output
 
 
@@ -127,7 +127,7 @@ def test_parse_empty_input():
 
     expected_output = OrderedDict({})
 
-    result = parse_clo(clo_input)
+    result = parse(clo_input)
     assert result == expected_output
 
 
@@ -150,7 +150,7 @@ def test_parse_no_name_box():
         }
     )
 
-    result = parse_clo(clo_input)
+    result = parse(clo_input)
     assert result == expected_output
 
 
@@ -181,7 +181,7 @@ def test_parse_multiple_blocks():
         }
     )
 
-    result = parse_clo(clo_input)
+    result = parse(clo_input)
     assert result == expected_output
 
 
@@ -214,7 +214,7 @@ def test_parse_unexpected_formatting():
         }
     )
 
-    result = parse_clo(clo_input)
+    result = parse(clo_input)
     assert result == expected_output
 
 
@@ -242,7 +242,7 @@ def test_parse_nested_lists():
         }
     )
 
-    result = parse_clo(clo_input)
+    result = parse(clo_input)
     assert result == expected_output
 
 
@@ -267,7 +267,7 @@ def test_parse_block_without_content():
         }
     )
 
-    result = parse_clo(clo_input)
+    result = parse(clo_input)
     assert result == expected_output or result == {
         "name": "EmptyBlock",
         "description": "",
@@ -306,5 +306,5 @@ def test_parse_incorrect_indentation():
         }
     )
 
-    result = parse_clo(clo_input)
+    result = parse(clo_input)
     assert result == expected_output

@@ -1,9 +1,9 @@
 import textwrap
 
-from .parse import parse_clo
+from .parse import parse
 
 
-def format_clo(data: dict[str, str | list], max_line_length=44):
+def format_dict(data: dict[str, str | list], max_line_length=44):
     """
     formats the data ordereddict into a beautiful clo string.
 
@@ -114,7 +114,7 @@ def format_clo(data: dict[str, str | list], max_line_length=44):
     return formatted_text.strip("\n")
 
 
-def format_clo_string(input_text, max_line_length=44):
+def format_str(input_text, max_line_length=44):
     """
     takes an ugly clo input string and returns a nicely formatted clo string.
 
@@ -122,6 +122,6 @@ def format_clo_string(input_text, max_line_length=44):
         input_text: the input clo string to format
         max_line_length: maximum length for wrapped lines (default: 44)
     """
-    data = parse_clo(input_text)
-    formatted_output = format_clo(data, max_line_length=max_line_length)
+    data = parse(input_text)
+    formatted_output = format_dict(data, max_line_length=max_line_length)
     return formatted_output

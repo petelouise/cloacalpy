@@ -5,7 +5,7 @@ import glob
 
 import click
 
-from .format import format_clo_string
+from .format import format_str
 from .toml2clo import toml2clo
 
 

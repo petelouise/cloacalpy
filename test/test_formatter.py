@@ -1,4 +1,4 @@
-from cloacal.format import format_clo_string
+from cloacal.format import format_str
 
 
 def test_format_basic_input():
@@ -52,7 +52,7 @@ memories ----------------------------------
     do dolor.
 """.strip()
 
-    formatted_output = format_clo_string(ugly_input)
+    formatted_output = format_str(ugly_input)
     assert formatted_output == expected_output
 
 
@@ -73,7 +73,7 @@ description -------------------------------
   A character with no name box.
 """.strip()
 
-    formatted_output = format_clo_string(ugly_input)
+    formatted_output = format_str(ugly_input)
     assert formatted_output == expected_output
 
 
@@ -82,7 +82,7 @@ def test_format_empty_input():
 
     expected_output = ""
 
-    formatted_output = format_clo_string(ugly_input)
+    formatted_output = format_str(ugly_input)
     assert formatted_output == expected_output
 
 
@@ -99,7 +99,7 @@ def test_format_only_name():
 +------------------------------------------+
 """.strip()
 
-    formatted_output = format_clo_string(ugly_input)
+    formatted_output = format_str(ugly_input)
     assert formatted_output == expected_output
 
 
@@ -126,7 +126,7 @@ description ----- Contains unexpected content.
 unknown_field --- data
 """.strip()
 
-    formatted_output = format_clo_string(ugly_input)
+    formatted_output = format_str(ugly_input)
     assert formatted_output == expected_output
 
 
@@ -149,7 +149,7 @@ age ------- 100
 species --- mythical creature
 """.strip()
 
-    formatted_output = format_clo_string(ugly_input)
+    formatted_output = format_str(ugly_input)
     assert formatted_output == expected_output
 
 
@@ -176,7 +176,7 @@ description ---
 memories ------
 """.strip()
 
-    formatted_output = format_clo_string(ugly_input)
+    formatted_output = format_str(ugly_input)
     assert formatted_output == expected_output
 
 
@@ -215,5 +215,5 @@ notes -------------------------------------
   sections.
 """.strip()
 
-    formatted_output = format_clo_string(ugly_input)
+    formatted_output = format_str(ugly_input)
     assert formatted_output == expected_output

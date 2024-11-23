@@ -1,6 +1,6 @@
 import tomllib
 
-from .format import format_clo
+from .format import format_dict
 
 
 def toml2clo(toml_input: str, max_line_length: int = 44) -> str:
@@ -22,4 +22,4 @@ def toml2clo(toml_input: str, max_line_length: int = 44) -> str:
         raise NotImplementedError("multiple entries not supported yet.")
     if len(data) == 0:
         return ""
-    return format_clo(data[0], max_line_length=max_line_length)
+    return format_dict(data[0], max_line_length=max_line_length)
