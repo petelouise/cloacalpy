@@ -19,8 +19,11 @@ def main():
     if args.file:
         with open(args.file, "r") as f:
             input_text = f.read()
-    else:
+    elif not sys.stdin.isatty():
         input_text = sys.stdin.read()
+    else:
+        argparser.print_help()
+        sys.exit(1)
 
     formatted_output = format_clo_string(input_text, max_line_length=args.width)
     print(formatted_output)
