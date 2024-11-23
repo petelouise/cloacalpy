@@ -3,7 +3,8 @@ import sys
 
 from .format import format_clo_string
 
-if __name__ == "__main__":
+
+def main():
     argparser = argparse.ArgumentParser(description="Format a .clo file")
     argparser.add_argument(
         "file",
