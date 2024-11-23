@@ -7,8 +7,7 @@ from .format import format_clo_string
 def main():
     argparser = argparse.ArgumentParser(description="Format a .clo file")
     argparser.add_argument(
-        "file",
-        nargs="?",
+        "-f", "--file",
         help="Input file (optional, reads from stdin if not provided)",
     )
     argparser.add_argument(
