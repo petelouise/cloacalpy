@@ -1,6 +1,6 @@
 from collections import OrderedDict
 
-from cloacal.parser import parse_clo
+from cloacal.parse import parse_clo
 
 
 def test_parse_basic_input():

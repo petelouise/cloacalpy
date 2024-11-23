@@ -1,5 +1,6 @@
 import textwrap
-from .parser import parse_clo
+
+from .parse import parse_clo
 
 
 def format_clo(data, max_line_length=44):
