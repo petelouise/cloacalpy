@@ -1,5 +1,7 @@
-import tomli
 from collections import OrderedDict
+
+import tomllib
+
 from .format import format_clo
 
 
@@ -14,21 +16,5 @@ def toml_to_clo(toml_input: str, max_line_length: int = 44) -> str:
     Returns:
         str: Formatted Cloacal string.
     """
-    data = tomli.loads(toml_input)
-    clo_data = OrderedDict()
-
-    # Map TOML fields to Cloacal fields
-    if 'name' in data:
-        clo_data['name'] = data['name']
-    if 'age' in data:
-        clo_data['age'] = str(data['age'])
-    if 'species' in data:
-        clo_data['species'] = data['species']
-    if 'ilk' in data:
-        clo_data['ilk'] = data['ilk']
-    if 'description' in data:
-        clo_data['description'] = data['description']
-    if 'memories' in data:
-        clo_data['memories'] = data['memories']
-
-    return format_clo(clo_data, max_line_length=max_line_length)
+    data = OrderedDict(tomllib.loads(toml_input))
+    return format_clo(data, max_line_length=max_line_length)
