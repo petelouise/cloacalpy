@@ -1,41 +1,43 @@
 import pytest
-from cloacal.toml_to_clo import toml2clo
+import tomllib
+
+from cloacal.toml2clo import toml2clo
 
 
 def test_toml2clo_basic():
     toml_input = """
+    ["whoever"]
     name = "Carlisle"
     age = 99
     species = "seagull"
     ilk = "bird"
 
-    description = """
-    Id ipsum elit tempor non incididunt laborum 
-    anim dolore eu fugiat.
-    """
+    description = "Id ipsum elit tempor non incididunt laborum anim dolore eu fugiat."
 
     memories = [
         "Consectetur ut qui Lorem ad.",
         "Veniam mollit nostrud velit laborum veniam irure ut aute magna labore aliqua."
     ]
-    """
+    """.strip()
 
     expected_output = """
-+----------------------------------------+
-|                Carlisle                |
-+----------------------------------------+
++------------------------------------------+
+|                 Carlisle                 |
++------------------------------------------+
 
 age ------- 99
 ilk ------- bird
 species --- seagull
 
 description -------------------------------
-  Id ipsum elit tempor non incididunt laborum 
-  anim dolore eu fugiat.
+  Id ipsum elit tempor non incididunt
+  laborum anim dolore eu fugiat.
 
 memories ----------------------------------
   > Consectetur ut qui Lorem ad.
-  > Veniam mollit nostrud velit laborum veniam irure ut aute magna labore aliqua.
+  > Veniam mollit nostrud velit laborum
+    veniam irure ut aute magna labore
+    aliqua.
 """.strip()
 
     formatted_output = toml2clo(toml_input)
@@ -44,25 +46,25 @@ memories ----------------------------------
 
 def test_toml2clo_missing_fields():
     toml_input = """
+    ["angel"]
     name = "Anonymous"
     age = 30
     species = "human"
 
-    description = """
-    This is a character with some missing fields.
-    """
+    description = "This is a character with some missing fields."
     """
 
     expected_output = """
-+----------------------------------------+
-|               Anonymous                 |
-+----------------------------------------+
++-----------------------------------------+
+|                Anonymous                |
++-----------------------------------------+
 
 age ------- 30
 species --- human
 
 description -------------------------------
-  This is a character with some missing fields.
+  This is a character with some missing
+  fields.
 """.strip()
 
     formatted_output = toml2clo(toml_input)
@@ -78,15 +80,14 @@ def test_toml2clo_empty_input():
 
 def test_toml2clo_additional_fields():
     toml_input = """
+    ["angle"]
     name = "Evelyn"
     age = 28
     species = "fox"
     ilk = "clever"
     occupation = "detective"
 
-    description = """
-    A clever fox with a knack for solving mysteries.
-    """
+    description = "A clever fox with a knack for solving mysteries."
 
     skills = [
         "stealth",
@@ -96,19 +97,20 @@ def test_toml2clo_additional_fields():
     """
 
     expected_output = """
-+----------------------------------------+
-|                 Evelyn                 |
-+----------------------------------------+
++------------------------------------------+
+|                  Evelyn                  |
++------------------------------------------+
 
-age ------- 28
-ilk ------- clever
-occupation -- detective
-species --- fox
+age ---------- 28
+ilk ---------- clever
+occupation --- detective
+species ------ fox
 
 description -------------------------------
-  A clever fox with a knack for solving mysteries.
+  A clever fox with a knack for solving
+  mysteries.
 
-skills -----------------------------------
+skills ------------------------------------
   > stealth
   > investigation
   > disguise
@@ -120,9 +122,10 @@ skills -----------------------------------
 
 def test_toml2clo_invalid_toml():
     toml_input = """
-    name = "Invalid
-    age = thirty
-    species = "dragon"
+    ["engels"]
+    name: "Invalid
+    age: thirty
+    species: "bluejay"
     """
 
     with pytest.raises(tomllib.TOMLDecodeError):
