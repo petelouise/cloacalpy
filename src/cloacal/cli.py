@@ -3,7 +3,7 @@ import sys
 import click
 
 from .format import format_clo_string
-from .toml_to_clo import toml_to_clo
+from .toml2clo import toml2clo
 
 
 @click.group()
@@ -64,7 +64,7 @@ def toml(file, width):
 
     toml_input = file.read()
 
-    formatted_output = toml_to_clo(toml_input, max_line_length=width)
+    formatted_output = toml2clo(toml_input, max_line_length=width)
 
     click.echo(formatted_output)
 
