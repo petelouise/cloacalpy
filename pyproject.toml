@@ -5,7 +5,9 @@ description = "Add your description here"
 readme = "README.md"
 authors = [{ name = "petelouise", email = "programmetress@petelouise.beauty" }]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "click>=8.1.7",
+]
 
 [project.scripts]
 cloacal = "cloacal.cli:main"
