@@ -123,5 +123,4 @@ def format_str(input_text, max_line_length=44):
         max_line_length: maximum length for wrapped lines (default: 44)
     """
     data = parse(input_text)
-    formatted_output = format_dict(data, max_line_length=max_line_length)
-    return formatted_output
+    return format_dict(data, max_line_length=max_line_length)
