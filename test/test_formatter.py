@@ -13,7 +13,7 @@ def test_format_basic_input():
 
     description ----
          Id ipsum elit tempor non incididunt laborum
-      anim dolore eu fugiat. Dolor consectetur aute occaecat. Ex do reprehenderit nulla sunt dolor
+      anim dolore-eu-fugiat. Dolor consectetur aute occaecat. Ex do reprehenderit nulla sunt dolor
       laborum qui. Qui voluptate tempor excepteur
       ex ea excepteur. Ipsum do elit fugiat laboris
       veniam pariatur.
@@ -35,7 +35,7 @@ species --- seagull
 
 description -------------------------------
   Id ipsum elit tempor non incididunt
-  laborum anim dolore eu fugiat. Dolor
+  laborum anim dolore-eu-fugiat. Dolor
   consectetur aute occaecat. Ex do
   reprehenderit nulla sunt dolor laborum
   qui. Qui voluptate tempor excepteur ex ea
